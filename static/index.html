@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+ <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="styles/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/plugins/uniform/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/plugins/bower_components/ui-select/dist/select.css" rel="stylesheet" type="text/css"/>
+
+
+    <link href="styles/plugins/bower_components/angular-gantt/dist/angular-gantt.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/plugins/bower_components/angular-gantt/dist/angular-gantt-plugins.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="styles/plugins/bower_components/angular-ui-tree/dist/angular-ui-tree.min.css"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN DYMANICLY LOADED CSS FILES(all plugin and page related styles must be loaded between GLOBAL and THEME css files ) -->
+    <link id="ng_load_plugins_before"/>
+    <!-- END DYMANICLY LOADED CSS FILES -->
+
+    <!-- BEGIN THEME STYLES -->
+    <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+    <link href="styles/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
+    <link href="styles/css/plugins.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/css/layout.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/css/themes/light.css" rel="stylesheet" type="text/css"/>
+    <link href="styles/css/custom.css" rel="stylesheet" type="text/css"/>
+    <!-- END THEME STYLES -->
+
+</head>
+
+
+<body>
+    <div id="gantt" ng-app="app">
+        <h1>Gantt</h1>
+        <div  ng-controller="GanttCtrl">
+
+                <div class="col-md-12">
+                    <div class="form-line">
+                        <div class="row">
+                            <div class="form-group col-md-2" style="padding:0;">
+                                <div class="input-group" style="width:100%">
+                                    <select ng-options="s[0] as s[1] for s in [['3 hours', '3小时'], ['day', '天'], ['week', '周'], ['2 weeks', '2周'], ['month', '月'], ['quarter', '季度'], ['6 months', '6个月'], ['year', '年']]"
+                                            ng-model="gantt.params.scale" class="form-control">
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="form-group col-md-2" style="padding:0;">
+                                <div class="input-group" style="width:100%">
+                                    <select ng-options="s[0] as s[1] for s in [['','默认排序'],['name', '名字'], ['from', '开始时间'], ['to', '结束时间']]"
+                                            ng-model="options.sortMode" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2" style="padding:0;">
+                                <div class="input-group" style="width:100%">
+                                    <input class="form-control"
+                                           datepicker-popup
+                                           is-open="open_start_date"
+                                           max-date="gantt.params.end_date"
+                                           ng-click="open_start_date=true"
+                                           min-view="date" type="text" ng-model="gantt.params.start_date" placeholder="开始时间"/>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2" style="padding:0;">
+
+                                <div class="input-group" style="width:100%">
+                                    <input class="form-control"
+                                           datepicker-popup
+                                           is-open="open_end_date"
+                                           min-date="gantt.params.start_date"
+                                           ng-click="open_end_date=true"
+                                           min-view="date" type="text" ng-model="gantt.params.end_date" placeholder="截止时间"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-2" style="padding:0;">
+
+                                <div class="input-group" style="width:100%">
+                                    <select ng-model="gantt.params.state" class="form-control">
+                                        <option value="">所有</option>
+                                        <option value="open">打开</option>
+                                        <option value="closed">关闭</option>
+                                        <option value="new">新建</option>
+                                        <option value="success">完成</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-2" style="padding:0;">
+                                <button class="btn btn-default" ng-click="expandAll()">Expand All</button>
+                                <button class="btn btn-default" ng-click="collapseAll()">Collapse All</button>
+                            </div>
+                            <div class="form-group col-md-2" style="padding:0;">
+                                <button class="btn red" ng-click="filter(gantt.params)">筛选</button>
+                                <button class="btn green" ng-click="reset()">清空</button>
+                            </div>
+                        </div>
+
+                        <div gantt
+                             ng-show="gantt.data.length"
+                             max-height="800"
+                             sort-mode="options.sortMode"
+                             allow-side-resizing="true"
+                             view-scale="gantt.params.scale"
+                             allow-side-resizing="false"
+                             current-date="options.currentDate"
+                             from-date="gantt.params.start_date"
+                             to-date="gantt.params.end_date"
+                             api="options.api"
+                             data="gantt.data">
+                            <gantt-tree></gantt-tree>
+                            <gantt-groups></gantt-groups>
+                            <gantt-table columns="options.columnsHeaderContents"></gantt-table>
+                            <gantt-progress></gantt-progress>
+                            <gantt-tooltips></gantt-tooltips>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+
+        <script src="styles/plugins/respond.min.js"></script>
+        <script src="styles/plugins/excanvas.min.js"></script>
+        <![endif]-->
+
+        <script src="styles/plugins/jquery.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <!-- END CORE JQUERY PLUGINS -->
+
+
+        <!-- BEGIN APP LEVEL JQUERY SCRIPTS -->
+        <script src="styles/scripts/metronic.js" type="text/javascript"></script>
+        <script src="styles/scripts/layout.js" type="text/javascript"></script>
+        <!--<script src="styles/scripts/quick-sidebar.js" type="text/javascript"></script>-->
+        <script src="styles/scripts/demo.js" type="text/javascript"></script>
+        <!-- END APP LEVEL JQUERY SCRIPTS -->
+
+
+        <!-- BEGIN CORE ANGULARJS PLUGINS -->
+        <script src="styles/plugins/bower_components/angular/angular.js" type="text/javascript"></script>
+        <script src="styles/plugins/bower_components/angular/angular.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/bower_components/angular-sanitize/angular-sanitize.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/bower_components/angular-touch/angular-touch.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/bower_components/angular-ui-router/release/angular-ui-router.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/bower_components/ocLazyLoad/dist/ocLazyLoad.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/bower_components/angular-cookies/angular-cookies.js" type="text/javascript"></script>
+        <!-- END CORE ANGULARJS PLUGINS -->
+
+        <!-- TODO change it-->
+        <script src="styles/plugins/bower_components/angular-ui-tree/dist/angular-ui-tree.js" type="text/javascript"></script>
+        <script src="styles/plugins/bower_components/angular-auto-validate/dist/jcs-auto-validate.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/bower_components/ui-select/dist/select.min.js" type="text/javascript"></script>
+        <script src="styles/plugins/bower_components/ng-file-upload/ng-file-upload.min.js"></script>
+        <script src="styles/plugins/bower_components/ng-file-upload/ng-file-upload-shim.min.js"></script>
+        <script src="styles/plugins/bower_components/angular-i18n/angular-locale_zh-cn.js"></script>
+        <script src="styles/plugins/bower_components/headroom.js/dist/headroom.js"></script>
+        <script src="styles/plugins/bower_components/headroom.js/dist/angular.headroom.js"></script>
+        <script src="styles/plugins/bower_components/angular-gantt/dist/angular-gantt.js"></script>
+        <script src="styles/plugins/bower_components/angular-gantt/dist/angular-gantt-plugins.js"></script>
+        <script src="styles/plugins/bower_components/Chart.js/Chart.js"></script>
+        <script src="styles/plugins/bower_components/angular-chart.js/dist/angular-chart.js"></script>
+        <script src="styles/plugins/bower_components/angular-highlightjs/build/angular-highlightjs.js"></script>
+        <script src="styles/plugins/bower_components/moment/min/moment.min.js"></script>
+        <script src="styles/plugins/bower_components/moment/locale/zh-cn.js"></script>
+        <script src="styles/plugins/bower_components/angular-moment/angular-moment.min.js"></script>
+
+        <script src="js/app.js" type="text/javascript"></script>
+        <script type="text/ng-template" id="gantt-tooltips">
+            <div ng-cloak class="gantt-task-info" ng-show="displayed"
+                 ng-class="isRightAligned ? gantt-task-infoArrowR : gantt-task-infoArrow"
+                 ng-style="{top: taskRect.top + 'px', marginTop: -elementHeight - 8 + 'px'}">
+                <div class="gantt-task-info-content">
+                    <p>{{task.model.name1}}</p>
+
+                    <p ng-switch="task.model.state">
+                        <strong>状态:</strong>
+                        <span ng-switch-when="open">打开</span>
+                        <span ng-switch-when="closed">关闭</span>
+                        <span ng-switch-when="new">新建</span>
+                        <span ng-switch-when="success">完成</span>
+                    </p>
+
+                    <!--<p ng-switch="task.model.type"><strong>任务类型:</strong><span ng-switch-when="normal">普通任务</span>-->
+                    <!--<span ng-switch-when="develop">开发任务</span>-->
+                    <!--<span ng-switch-when="package">编译软件</span> <span ng-switch-when="image">系统集成</span></p>-->
+
+                    <p><strong>执行人:</strong>{{task.model.executor}}</p>
+
+                    <p><strong>开始时间:</strong>{{task.model.from|amDateFormat:'YYYY-MM-DD'}}</p>
+
+                    <p><strong>预估完成时间:</strong>{{task.model.to|amDateFormat:'YYYY-MM-DD'}}</p>
+                </div>
+            </div>
+        </script>
+</body>
+</html>
+
+
+
+
+
+
+

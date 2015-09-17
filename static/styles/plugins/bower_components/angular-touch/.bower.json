@@ -1,0 +1,19 @@
+{
+  "name": "angular-touch",
+  "version": "1.4.4-build.4156+sha.ed3a33a",
+  "main": "./angular-touch.js",
+  "ignore": [],
+  "dependencies": {
+    "angular": "1.4.4-build.4156+sha.ed3a33a"
+  },
+  "homepage": "https://github.com/angular/bower-angular-touch",
+  "_release": "1.4.4-build.4156+sha.ed3a33a",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.4.4-build.4156+sha.ed3a33a",
+    "commit": "cfe2e2400ff8301aa6b093906d8125cca005c1e6"
+  },
+  "_source": "git://github.com/angular/bower-angular-touch.git",
+  "_target": "v1.4.4-build.4156+sha.ed3a33a",
+  "_originalSource": "angular-touch"
+}

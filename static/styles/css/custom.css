@@ -1,0 +1,149 @@
+/* here you can put your own css to customize and override the theme */
+
+/***
+Rounded Portlets
+***/
+/*
+.portlet {
+	border-radius: 4px !important;
+}
+
+.portlet .portlet-title {
+	border-radius: 4px 4px 0px 0px !important;
+}
+
+.portlet .portlet-body,
+.portlet .portlet-body .form-actions  {
+	border-radius: 0px 0px 4px 4px !important;
+}
+*/
+
+/*
+Change Quick Sidebar Width
+*/
+
+/*
+.page-quick-sidebar-wrapper {
+  right: -370px;
+  width: 370px;
+}
+
+.page-quick-sidebar-open.page-quick-sidebar-push-content .page-sidebar-wrapper {
+  margin-left: -370px;
+}
+
+.page-quick-sidebar-open.page-quick-sidebar-push-content .page-footer {
+  margin-right: 370px;
+  margin-left: -370px;
+}
+
+.page-sidebar-reversed.page-quick-sidebar-open.page-quick-sidebar-push-content .page-sidebar-wrapper {
+  margin-right: 370px;
+}
+
+.page-quick-sidebar-open.page-quick-sidebar-push-content.page-quick-sidebar-full-height .page-header {
+  margin-left: -370px;
+}
+
+.page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-list {
+  width: 370px !important;
+}
+
+.page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-item {
+  width: 370px !important;
+  margin-left: 370px;
+}
+
+.page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-content-item-shown .page-quick-sidebar-list {
+  margin-left: -370px;
+}
+*/
+
+/* Links */
+a {
+  text-shadow: none;
+  color: #5b9bd1;
+}
+a:hover, a:active {
+  /*color: #3175af;*/
+  color: #3175af;
+}
+
+a:focus, a:hover {
+  outline: 0;
+}
+
+.portal-header{
+  color: #fff;
+}
+
+.portal-header:focus{
+  outline: 0;
+  color: #fff;
+}
+
+/*#E7E7E7*/
+
+.page-header-fixed .page-container {
+  margin-top: 40px;
+}
+
+.page-header.navbar {
+  height: 40px;
+  min-height: 40px;
+}
+
+.navbar-brand{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  height: 40px;
+}
+
+.page-header.navbar .hor-menu .navbar-nav > li > a {
+  padding: 10px 10px;
+}
+
+.navbar-nav>li>a{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.page-header.navbar .top-menu .navbar-nav > li.dropdown {
+  height: 40px;
+}
+
+.page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle {
+  padding-top:10px;
+  padding-bottom: 10px;
+}
+
+
+.page-bar {
+  font-size: 28px;
+  letter-spacing: -1px;
+  background-color: #fff;
+  display: block;
+  color: #666;
+  margin: 0px 0px 15px 0px;
+  font-weight: 300;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+}
+
+
+.page-content {
+   border-left: 0px;
+   border-bottom: 0px;
+}
+
+/*
+标签颜色选择布局
+*/
+.suggest-colors a{
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-top: 10px;
+}

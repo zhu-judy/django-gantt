@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="{% static "styles/plugins/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "styles/plugins/simple-line-icons/simple-line-icons.min.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "styles/plugins/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "styles/plugins/uniform/css/uniform.default.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "styles/plugins/bootstrap-switch/css/bootstrap-switch.min.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "styles/plugins/bower_components/ui-select/dist/select.css" %}" rel="stylesheet" type="text/css"/>
+
+
+    <link href="{% static "styles/plugins/bower_components/angular-gantt/dist/angular-gantt.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "styles/plugins/bower_components/angular-gantt/dist/angular-gantt-plugins.css" %}" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="{% static "styles/plugins/bower_components/angular-ui-tree/dist/angular-ui-tree.min.css" %}"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN DYMANICLY LOADED CSS FILES(all plugin and page related styles must be loaded between GLOBAL and THEME css files ) -->
+    <link id="ng_load_plugins_before"/>
+    <!-- END DYMANICLY LOADED CSS FILES -->
+
+    <!-- BEGIN THEME STYLES -->
+    <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+    <link href="{% static "styles/css/components.css" %}" id="style_components" rel="stylesheet" type="text/css"/>
+    <link href="{% static "styles/css/plugins.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "styles/css/layout.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "styles/css/themes/light.css" %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static "styles/css/custom.css" %}" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    {% block gantt %}
+    {% endblock %}
+
+        <!-- BEGIN CORE ANGULARJS PLUGINS -->
+
+        <script src="{% static "styles/plugins/bower_components/angular/angular.js" %}" type="text/javascript"></script>
+        <script src="{% static "styles/plugins/bower_components/angular-ui-router/release/angular-ui-router.min.js" %}" type="text/javascript"></script>
+
+        <script src="{% static "styles/plugins/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js" %}" type="text/javascript"></script>
+
+        <!-- TODO change it-->
+        <script src="{% static "styles/plugins/bower_components/angular-ui-tree/dist/angular-ui-tree.js" %}" type="text/javascript"></script>
+        <script src="{% static "styles/plugins/bower_components/ui-select/dist/select.min.js" %}" type="text/javascript"></script>
+
+        <script src="{% static "styles/plugins/bower_components/angular-gantt/dist/angular-gantt.js" %}"></script>
+        <script src="{% static "styles/plugins/bower_components/angular-gantt/dist/angular-gantt-plugins.js" %}"></script>
+        <script src="{% static "styles/plugins/bower_components/moment/min/moment.min.js" %}"></script>
+        <script src="{% static "styles/plugins/bower_components/angular-moment/angular-moment.min.js" %}"></script>
+{#        <script src="{% static "styles/plugins/bower_components/angular-i18n/angular-locale_zh-cn.js" %}"></script>#}
+    <script src="{% static "styles/plugins/bower_components/moment/locale/zh-cn.js" %}"></script>
+
+        <script src="{% static "js/app.js" %}" type="text/javascript"></script>
+        
+</body>
+</html>

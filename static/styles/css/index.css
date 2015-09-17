@@ -1,0 +1,151 @@
+.text-middle{
+    text-align: center;
+}
+.jumbotron{
+    margin-bottom: 0;
+    background-color: white;
+}
+.mybtn{
+    height: inherit;
+    /*vertical-align: middle;*/
+    text-align: center;
+}
+.mybtn button{
+    background-color:#555480;
+    height: 50px;
+    width: 200px;
+    margin-top: 30px;
+    border-width: 0;
+    font-family: adelle-sans,sans-serif;
+    font-size: 30px;
+    color: white;
+}
+.navbar{
+    margin-bottom: auto;
+}
+.col-md-12 {
+    width: 100%;
+}
+.features{
+    padding: 5em 0 2em;
+    background: #F2F5FA;
+}
+.media{
+    margin-left: 60px;
+    /*padding-left: 50px;*/
+}
+.spikenode-steps .section-headline {
+    color: #7bdb4d;
+}
+.section-headline {
+    color: #8155a3;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-family: adelle-sans,sans-serif;
+    margin-top: 0;
+}
+
+.spikenode-steps{
+    background: linear-gradient(to bottom,#555480 0,#2b2f3f 80%);
+    padding: 6em 0 3em;
+}
+.spikenode-steps .section-tagline {
+    color: #fff;
+}
+.section-tagline {
+    color: #2f3346;
+    font-size: 30px;
+    font-weight: 400;
+    font-family: adelle-sans,sans-serif;
+    padding: 0 0 .5em;
+}
+
+.step-list{
+    list-style: none;
+    counter-reset: stepList;
+    text-align: left;
+    color: #fff;
+    margin: 4em 10em;
+}
+.step-list li {
+    position: relative;
+    margin-bottom: 98px;
+    padding-left: 105px;
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+.step-list li.step-job {
+    margin-bottom: 98px;
+}
+.step-list li.step-run {
+    margin-bottom: 94px;
+}
+.step-list .step-headline {
+    font-size: 25px;
+    margin-left: 100px;
+}
+.step-list .step-description {
+    font-size: 18px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: adelle-sans,sans-serif;
+}
+.step-description{
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    margin-left: 100px;
+
+}
+
+.step-list li:before {
+    content: counter(stepList);
+    counter-increment: stepList;
+    color: #989dff;
+    font-size: 27px;
+    font-family: adelle-sans,sans-serif;
+    font-weight: 600;
+    border: 2px solid #989dff;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+    width: 80px;
+    height: 80px;
+    line-height: 75px;
+    position: absolute;
+    left: 100px;
+    top: 0;
+}
+
+.step-list li.step-job:before {
+    color: #98ffea;
+    border-color: #98ffea;
+}
+.step-list li.step-run:before {
+    color: #75d6ff;
+    border-color: #75d6ff;
+}
+.step-list li.step-analyze:before {
+    color: #d7ff98;
+    border-color: #d7ff98;
+}
+
+.row:after, .row:before {
+    content: " ";
+    display: table;
+}
+*, :after, :before {
+    box-sizing: border-box;
+}
+
+.site-footer{
+    margin-bottom: 10px;
+    margin-top: 10px;
+}

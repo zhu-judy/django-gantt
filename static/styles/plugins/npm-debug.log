@@ -1,0 +1,41 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/local/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'install',
+1 verbose cli   'bower.json' ]
+2 info using npm@2.11.3
+3 info using node@v0.12.7
+4 verbose install initial load of /home/cz/newwork/pm-web/src/styles/plugins/package.json
+5 verbose readDependencies loading dependencies from /home/cz/newwork/pm-web/src/styles/plugins/package.json
+6 silly cache add args [ 'bower.json', null ]
+7 verbose cache add spec bower.json
+8 silly cache add parsed spec { raw: 'bower.json',
+8 silly cache add   scope: null,
+8 silly cache add   name: null,
+8 silly cache add   rawSpec: 'bower.json',
+8 silly cache add   spec: '/home/cz/newwork/pm-web/src/styles/plugins/bower.json',
+8 silly cache add   type: 'local' }
+9 silly addLocalTarball shasum (computed) 75ff26b82d36bb0cbca0baf89b33af351225c8d0
+10 verbose addTmpTarball /home/cz/newwork/pm-web/src/styles/plugins/bower.json not in flight; adding
+11 verbose addTmpTarball validating metadata from /home/cz/newwork/pm-web/src/styles/plugins/bower.json
+12 verbose tar unpack /home/cz/newwork/pm-web/src/styles/plugins/bower.json
+13 verbose tar unpacking to /tmp/npm-8067-3073503c/unpack-e8a6aff7fb7c
+14 silly gentlyRm /tmp/npm-8067-3073503c/unpack-e8a6aff7fb7c is being purged
+15 verbose gentlyRm don't care about contents; nuking /tmp/npm-8067-3073503c/unpack-e8a6aff7fb7c
+16 silly gunzTarPerm modes [ '775', '664' ]
+17 error not a package /home/cz/newwork/pm-web/src/styles/plugins/bower.json
+18 error addLocal Could not install /home/cz/newwork/pm-web/src/styles/plugins/bower.json
+19 verbose stack Error: ENOENT, open '/tmp/npm-8067-3073503c/unpack-e8a6aff7fb7c/package.json'
+19 verbose stack     at Error (native)
+20 verbose cwd /home/cz/newwork/pm-web/src/styles/plugins
+21 error Linux 3.13.0-32-generic
+22 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "bower.json"
+23 error node v0.12.7
+24 error npm  v2.11.3
+25 error path /tmp/npm-8067-3073503c/unpack-e8a6aff7fb7c/package.json
+26 error code ENOENT
+27 error errno -2
+28 error enoent ENOENT, open '/tmp/npm-8067-3073503c/unpack-e8a6aff7fb7c/package.json'
+28 error enoent This is most likely not a problem with npm itself
+28 error enoent and is related to npm not being able to find a file.
+29 verbose exit [ -2, true ]

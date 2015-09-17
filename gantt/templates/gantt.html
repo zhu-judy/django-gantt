@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block gantt %}
+
+{% verbatim %}
+
+    <div class="ng-scope" ng-app="app">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-purple-plum">
+                    <i class="fa fa-cogs font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp bold uppercase"> 甘特图 </span>
+                </div>
+                <div class="actions">
+                    <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;"
+                       data-original-title="" title="">
+                    </a>
+                </div>
+            </div>
+
+            <div class="portlet-body" id="gantt" >
+                <div class="table-toolbar" ng-controller="GanttCtrl">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-line">
+
+                                <div class="form-group col-md-1" style="padding:0;">
+                                    <div class="input-group" style="width:100%">
+                                        <select ng-options="s[0] as s[1] for s in [['3 hours', '3小时'], ['day', '天'], ['week', '周'], ['2 weeks', '2周'], ['month', '月'], ['quarter', '季度'], ['6 months', '6个月'], ['year', '年']]"
+                                                ng-model="gantt.params.scale" class="form-control">
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="form-group col-md-1" style="padding:0;">
+                                    <div class="input-group" style="width:100%">
+                                        <select ng-options="s[0] as s[1] for s in [['','默认排序'],['name', '名字'], ['from', '开始时间'], ['to', '结束时间']]"
+                                                ng-model="options.sortMode" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-1" style="padding:0;">
+                                    <div class="input-group" style="width:100%">
+                                        <input class="form-control"
+                                               datepicker-popup
+                                               is-open="open_start_date"
+                                               max-date="gantt.params.end_date"
+                                               ng-click="open_start_date=true"
+                                               min-view="date" type="text" ng-model="gantt.params.start_date" placeholder="开始时间"/>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-1" style="padding:0;">
+
+                                    <div class="input-group" style="width:100%">
+                                        <input class="form-control"
+                                               datepicker-popup
+                                               is-open="open_end_date"
+                                               min-date="gantt.params.start_date"
+                                               ng-click="open_end_date=true"
+                                               min-view="date" type="text" ng-model="gantt.params.end_date" placeholder="截止时间"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-1" style="padding:0;">
+
+                                    <div class="input-group" style="width:100%">
+                                        <select ng-model="gantt.params.state" class="form-control">
+                                            <option value="">所有</option>
+                                            <option value="open">打开</option>
+                                            <option value="closed">关闭</option>
+                                            <option value="new">新建</option>
+                                            <option value="success">完成</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-1" style="padding:0;">
+                                    <div class="input-group" style="width:100%">
+                                        <select ng-model="gantt.params.executor" class="form-control">
+                                            <option value="">所有</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-1" style="padding:0;">
+                                    <button class="btn btn-default" ng-click="expandAll()">展开</button>
+                                    <button class="btn btn-default" ng-click="collapseAll()">折叠</button>
+                                </div>
+                                <div class="form-group col-md-1" style="padding:0;">
+                                    <button class="btn red" ng-click="filter(gantt.params)">筛选</button>
+                                    <button class="btn green" ng-click="reset()">清空</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div gantt
+                         ng-show="gantt.data.length"
+                         max-height="800"
+                         sort-mode="options.sortMode"
+                         allow-side-resizing="true"
+                         view-scale="gantt.params.scale"
+                         allow-side-resizing="false"
+                         current-date="options.currentDate"
+                         from-date="gantt.params.start_date"
+                         to-date="gantt.params.end_date"
+                         api="options.api"
+                         data="gantt.data">
+                        <gantt-tree></gantt-tree>
+                        <gantt-groups></gantt-groups>
+                        <gantt-table columns="options.columnsHeaderContents"></gantt-table>
+                        <gantt-progress></gantt-progress>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/ng-template" id="gantt-tooltips">
+            <div ng-cloak class="gantt-task-info" ng-show="displayed"
+                 ng-class="isRightAligned ? gantt-task-infoArrowR : gantt-task-infoArrow"
+                 ng-style="{top: taskRect.top + 'px', marginTop: -elementHeight - 8 + 'px'}">
+                <div class="gantt-task-info-content">
+                    <p>{{task.model.name1}}</p>
+
+                    <p ng-switch="task.model.state">
+                        <strong>状态:</strong>
+                        <span ng-switch-when="open">打开</span>
+                        <span ng-switch-when="closed">关闭</span>
+                        <span ng-switch-when="new">新建</span>
+                        <span ng-switch-when="success">完成</span>
+                    </p>
+
+                    <!--<p ng-switch="task.model.type"><strong>任务类型:</strong><span ng-switch-when="normal">普通任务</span>-->
+                    <!--<span ng-switch-when="develop">开发任务</span>-->
+                    <!--<span ng-switch-when="package">编译软件</span> <span ng-switch-when="image">系统集成</span></p>-->
+
+                    <p><strong>执行人:</strong>{{task.model.executor}}</p>
+
+                    <p><strong>开始时间:</strong>{{task.model.from|amDateFormat:'YYYY-MM-DD'}}</p>
+
+                    <p><strong>预估完成时间:</strong>{{task.model.to|amDateFormat:'YYYY-MM-DD'}}</p>
+                </div>
+            </div>
+        </script>
+    {% endverbatim %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
